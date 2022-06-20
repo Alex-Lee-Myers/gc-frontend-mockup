@@ -31,10 +31,13 @@ const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 // getting API key
 require("dotenv").config();
 const vgKey = `${process.env.vgKey}`;
+//? .env variables were not working with Axios. Listing manually for now. May need to find a fix at later date.
 
 //Base URL
-const base_url = `https://api.rawg.io/api`;
+const base_url = `https://api.rawg.io/api/`;
 
 //Popular Games
-const popular_games = `games?key=${vgKey}&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
-export const popularGamesURL = () => `${base_url}/${popular_games}`;
+const popular_games = `games?key=df44616f52704b65ad1b1a04c5a21db5&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
+const popularGamesURL = () => base_url + popular_games;
+
+export default popularGamesURL;
