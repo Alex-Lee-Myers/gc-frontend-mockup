@@ -30,16 +30,17 @@ const nextYear = `${currentYear + 1}-${currentMonth}-${currentDay}`;
 //! API Calls
 // getting API key
 require("dotenv").config();
-const vgKey = `${process.env.vgKey}`;
+const vgKey = `${process.env.REACT_APP_RAWG_API_KEY}`;
 //? .env variables were not working with Axios. Listing manually for now. May need to find a fix at later date.
 
 //Base URL
 const base_url = `https://api.rawg.io/api/`;
 
 //Popular Games
-const popular_games = `games?key=df44616f52704b65ad1b1a04c5a21db5&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
-const upcoming_games = `games?key=df44616f52704b65ad1b1a04c5a21db5&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
-const new_games = `games?key=df44616f52704b65ad1b1a04c5a21db5&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
+const popular_games = `games?key=${process.env.REACT_APP_RAWG_API_KEY}&dates=${lastYear},${currentDate}&ordering=-rating&page_size=10`;
+const upcoming_games = `games?key=${process.env.REACT_APP_RAWG_API_KEY}&dates=${currentDate},${nextYear}&ordering=-added&page_size=10`;
+const new_games = `games?key=${process.env.REACT_APP_RAWG_API_KEY}&dates=${lastYear},${currentDate}&ordering=-released&page_size=10`;
+console.log(`${process.env.REACT_APP_RAWG_API_KEY}`);
 
 const popularGamesURL = () => base_url + popular_games;
 const upcomingGamesURL = () => base_url + upcoming_games;
@@ -49,9 +50,9 @@ const newGamesURL = () => base_url + new_games;
 const gameDetailsURL = (game_id) =>
 	`${base_url}games/${game_id}?key=df44616f52704b65ad1b1a04c5a21db5`;
 
-//! Game Screenshots
-const gameScreenshotsURL = (game_id) =>
-	`${base_url}games/${game_id}/screenshots?key=df44616f52704b65ad1b1a04c5a21db5`;
+// //! Game Screenshots
+// const gameScreenshotsURL = (game_id) =>
+// 	`${base_url}games/${game_id}/screenshots?key=df44616f52704b65ad1b1a04c5a21db5`;
 
 export {
 	vgKey,
@@ -60,7 +61,7 @@ export {
 	upcomingGamesURL,
 	newGamesURL,
 	gameDetailsURL,
-	gameScreenshotsURL,
+	// gameScreenshotsURL,
 	currentDate,
 	lastYear,
 	nextYear,
