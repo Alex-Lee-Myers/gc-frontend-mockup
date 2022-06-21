@@ -6,19 +6,19 @@ const loadGames = () => async (dispatch) => {
 	//Fetch AXIOS
 	const popularData = await axios.get(popularGamesURL(), {
 		params: {
-			key: process.env.vgKey,
+			key: process.env.REACT_APP_RAWG_API_KEY,
 		},
 	});
 
 	const upcomingData = await axios.get(upcomingGamesURL(), {
 		params: {
-			key: process.env.vgKey,
+			key: process.env.REACT_APP_RAWG_API_KEY,
 		},
 	});
 
 	const newGamesData = await axios.get(newGamesURL(), {
 		params: {
-			key: process.env.vgKey,
+			key: process.env.REACT_APP_RAWG_API_KEY,
 		},
 	});
 

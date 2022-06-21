@@ -6,7 +6,7 @@ import { motion } from "framer-motion/dist/framer-motion";
 import { useSelector } from "react-redux";
 
 const GameDetail = () => {
-	const { game } = useSelector((state) => state.detail);
+	const { game, screen } = useSelector((state) => state.detail);
 	return (
 		<div className="card-shadow">
 			<div className="detail">
@@ -18,29 +18,23 @@ const GameDetail = () => {
 				</div>
 				<div className="info">
 					<h3>Platforms</h3>
-					{/*
+
 					<div className="platforms">
 						{game &&
-							game.platforms.map((platform) => (
+							game.platforms?.map((platform) => (
 								<h3 key={platform.platform.id}>{platform.platform.name}</h3>
 							))}
 					</div>
-					*/}
 				</div>
 				<div className="screenshot">
 					<h3>Screenshots</h3>
-					{/*
+
 					<div className="screenshots">
-						{game &&
-							game.screen.results.map((screenshot) => (
-								<img
-									key={screenshot.id}
-									src={screenshot.image}
-									alt={game.name}
-								/>
+						{screen &&
+							screen.results.map((screens) => (
+								<img key={screens.id} src={screens.image} alt={game.name} />
 							))}
 					</div>
-					*/}
 				</div>
 
 				<div className="media">
