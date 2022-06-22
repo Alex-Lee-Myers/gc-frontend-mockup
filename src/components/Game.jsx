@@ -6,6 +6,7 @@ import { motion } from "framer-motion/dist/framer-motion";
 import { useDispatch } from "react-redux";
 import loadDetail from "../actions/DetailAction";
 import { Link } from "react-router-dom";
+import { smallImage } from "../util";
 
 const Game = ({ name, released, id, image, short_screenshots }) => {
 	const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Game = ({ name, released, id, image, short_screenshots }) => {
 			<Link to={`/game/${id}`}>
 				<h2>{name}</h2>
 				<p>{released}</p>
-				<img src={image} alt={name} />
+				<img src={smallImage(image, 640)} alt={name} loading="lazy" />
 			</Link>
 		</StyledGame>
 	);
