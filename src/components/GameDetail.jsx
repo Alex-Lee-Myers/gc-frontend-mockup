@@ -4,50 +4,66 @@ import styled from "styled-components";
 import { motion } from "framer-motion/dist/framer-motion";
 //Redux
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const GameDetail = () => {
-	const { game, screen } = useSelector((state) => state.detail);
+	const navigate = useNavigate();
+	//Exit Detail View
+	const exitDetailHandler = (e) => {
+		const element = e.target;
+		if (element.classList.contains("exit-detail")) {
+			document.body.style.overflow = "auto";
+			navigate("/");
+		}
+	};
+	const { game, screen, isLoading } = useSelector((state) => state.detail);
 	return (
-		<CardShadow>
-			<Detail>
-				<Stats>
-					<div className="rating">
-						<h3>{game.name}</h3>
-						<p>Rating: {game.rating}</p>
-					</div>
+		<>
+			{!isLoading && (
+				<CardShadow className="exit-detail" onClick={exitDetailHandler}>
+					<Detail>
+						<Stats>
+							<div className="rating">
+								<h3>{game.name}</h3>
+								<p>Rating: {game.rating}</p>
+							</div>
 
-					<Info>
-						<h3>Platforms</h3>
+							<Info>
+								<h3>Platforms</h3>
 
-						<Platforms>
-							{game &&
-								game.platforms?.map((platform) => (
-									<h3 key={platform.platform.id}>{platform.platform.name}</h3>
-								))}
-						</Platforms>
-					</Info>
-				</Stats>
+								<Platforms>
+									{game &&
+										game.platforms?.map((platform) => (
+											<h3 key={platform.platform.id}>
+												{platform.platform.name}
+											</h3>
+										))}
+								</Platforms>
+							</Info>
+						</Stats>
 
-				<Media>
-					<img src={game.background_image} alt={game.name} />
-				</Media>
+						<Media>
+							<img src={game.background_image} alt={game.name} />
+						</Media>
 
-				<Description>
-					<p>{game.description_raw}</p>
-				</Description>
+						<Description>
+							<p>{game.description_raw}</p>
+						</Description>
 
-				<div className="screenshot">
-					<h3>Screenshots</h3>
+						<div className="screenshot">
+							<h3>Screenshots</h3>
 
-					<div className="screenshots">
-						{screen &&
-							screen.results.map((screens) => (
-								<img key={screens.id} src={screens.image} alt={game.name} />
-							))}
-					</div>
-				</div>
-			</Detail>
-		</CardShadow>
+							<div className="screenshots">
+								{screen &&
+									screen.results.map((screens) => (
+										<img key={screens.id} src={screens.image} alt={game.name} />
+									))}
+							</div>
+						</div>
+					</Detail>
+				</CardShadow>
+			)}
+		</>
 	);
 };
 
@@ -111,7 +127,7 @@ const Media = styled(motion.div)`
 	}
 `;
 
-const Description = motion.div`
+const Description = styled(motion.div)`
 	margin: 5rem 0 rem;
 `;
 
