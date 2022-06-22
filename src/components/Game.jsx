@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { smallImage } from "../util";
 
 const Game = ({ name, released, id, image, short_screenshots }) => {
+	const stringPathId = id.toString();
 	const dispatch = useDispatch();
 	const loadDetailHandler = () => {
 		document.body.style.overflow = "hidden";
@@ -16,11 +17,16 @@ const Game = ({ name, released, id, image, short_screenshots }) => {
 	};
 
 	return (
-		<StyledGame onClick={loadDetailHandler}>
+		<StyledGame layoutId={stringPathId} onClick={loadDetailHandler}>
 			<Link to={`/game/${id}`}>
-				<h2>{name}</h2>
+				<motion.h3 layoutId={`title ${stringPathId}`}>{name}</motion.h3>
 				<p>{released}</p>
-				<img src={smallImage(image, 640)} alt={name} loading="lazy" />
+				<motion.img
+					layoutId={`image ${stringPathId}`}
+					src={smallImage(image, 640)}
+					alt={name}
+					loading="lazy"
+				/>
 			</Link>
 		</StyledGame>
 	);
