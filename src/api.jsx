@@ -50,6 +50,9 @@ const gameDetailsURL = (game_id) =>
 const gameScreenshotsURL = (game_id) =>
 	`${base_url}games/${game_id}/screenshots?key=${process.env.REACT_APP_RAWG_API_KEY}`;
 
+const searchGameURL = (game_name) =>
+	`${base_url}games?key=${process.env.REACT_APP_RAWG_API_KEY}&search=${game_name}&page_size=10`;
+
 export {
 	base_url,
 	popularGamesURL,
@@ -57,6 +60,7 @@ export {
 	newGamesURL,
 	gameDetailsURL,
 	gameScreenshotsURL,
+	searchGameURL,
 	currentDate,
 	lastYear,
 	nextYear,

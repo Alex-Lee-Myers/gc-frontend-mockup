@@ -1,5 +1,10 @@
 import axios from "axios";
-import { popularGamesURL, upcomingGamesURL, newGamesURL } from "../api";
+import {
+	popularGamesURL,
+	upcomingGamesURL,
+	newGamesURL,
+	searchGameURL,
+} from "../api";
 
 //Action Creator
 const loadGames = () => async (dispatch) => {
@@ -33,4 +38,19 @@ const loadGames = () => async (dispatch) => {
 	});
 };
 
-export default loadGames;
+const fetchSearch = (game_name) => async (dispatch) => {
+	const searchGames = await axios.get(searchGameURL(game_name), {
+		params: {
+			key: process.env.REACT_APP_RAWG_API_KEY,
+		},
+	});
+
+	dispatch({
+		type: "FETCH_SEARCHED",
+		payload: {
+			searched: searchGames.data.results,
+		},
+	});
+};
+
+export { loadGames, fetchSearch };

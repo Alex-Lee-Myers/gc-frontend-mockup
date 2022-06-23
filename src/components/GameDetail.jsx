@@ -6,8 +6,17 @@ import { motion } from "framer-motion/dist/framer-motion";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { smallImage } from "../util";
+//images import
+import playstation from "../img/playstation.svg";
+import xbox from "../img/xbox.svg";
+import steam from "../img/steam.svg";
+import nintendo from "../img/nintendo.svg";
+import apple from "../img/apple.svg";
+import gamepad from "../img/gamepad.svg";
+import starEmpty from "../img/star-empty.png";
+import starFull from "../img/star-full.png";
 
-const GameDetail = (pathId) => {
+const GameDetail = ({ pathId }) => {
 	const navigate = useNavigate();
 	//Exit Detail View
 	const exitDetailHandler = (e) => {
@@ -17,6 +26,45 @@ const GameDetail = (pathId) => {
 			navigate("/");
 		}
 	};
+
+	//Get Stars
+	const getStars = () => {
+		const stars = [];
+		const rating = Math.floor(game.rating);
+		for (let i = 1; i <= 5; i++) {
+			if (i <= rating) {
+				stars.push(<img alt="star" key={i} src={starFull}></img>);
+			} else {
+				stars.push(<img alt="star" key={i} src={starEmpty}></img>);
+			}
+		}
+		return stars;
+	};
+
+	//Platform images
+	const getPlatform = (platform) => {
+		switch (platform) {
+			case "PlayStation 4":
+				return playstation;
+			case "PlayStation 5":
+				return playstation;
+			case "Xbox Series S/X":
+				return xbox;
+			case "Xbox S":
+				return xbox;
+			case "Xbox One":
+				return xbox;
+			case "PC":
+				return steam;
+			case "Nintendo Switch":
+				return nintendo;
+			case "iOS":
+				return apple;
+			default:
+				return gamepad;
+		}
+	};
+
 	const { game, screen, isLoading } = useSelector((state) => state.detail);
 	return (
 		<>
@@ -26,7 +74,8 @@ const GameDetail = (pathId) => {
 						<Stats>
 							<div className="rating">
 								<motion.h3 layoutId={`title ${pathId}`}>{game.name}</motion.h3>
-								<p>Rating: {game.rating}</p>
+								<p>Rating: </p>
+								{getStars()}
 							</div>
 
 							<Info>
@@ -35,9 +84,12 @@ const GameDetail = (pathId) => {
 								<Platforms>
 									{game &&
 										game.platforms?.map((platform) => (
-											<h3 key={platform.platform.id}>
-												{platform.platform.name}
-											</h3>
+											<img
+												key={platform.platform.id}
+												src={getPlatform(platform.platform.name)}
+												alt={platform.platform.name}
+												title={platform.platform.name}
+											></img>
 										))}
 								</Platforms>
 							</Info>
@@ -46,7 +98,7 @@ const GameDetail = (pathId) => {
 						<Media>
 							<motion.img
 								layoutId={`image ${pathId}`}
-								src={smallImage(game.background_image, 1920)}
+								src={smallImage(game.background_image, 1280)}
 								alt={game.name}
 								loading="lazy"
 							/>
@@ -64,7 +116,7 @@ const GameDetail = (pathId) => {
 									screen.results.map((screens) => (
 										<img
 											key={screens.id}
-											src={smallImage(screens.image, 640)}
+											src={smallImage(screens.image, 1280)}
 											alt={game.name}
 											loading="lazy"
 										/>
@@ -109,6 +161,7 @@ const Detail = styled(motion.div)`
 	left: 10%;
 	padding: 5rem;
 	color: black;
+	z-index: 99;
 	img {
 		width: 100%;
 	}
@@ -118,6 +171,11 @@ const Stats = styled(motion.div)`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	img {
+		width: 2rem;
+		height: 2rem;
+		display: inline;
+	}
 `;
 
 const Info = styled(motion.div)`
