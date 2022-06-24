@@ -77,6 +77,16 @@ const StyledNav = styled(motion.nav)`
 		background: #ff7676;
 		color: white;
 	}
+	@media (max-width: 670px) {
+		padding: 0.5rem 0.5rem;
+		input {
+			width: 50%;
+			font-size: 1rem;
+		}
+		button {
+			font-size: 1rem;
+		}
+	}
 `;
 
 const Logo = styled(motion.div)`
@@ -87,6 +97,9 @@ const Logo = styled(motion.div)`
 	img {
 		height: 2rem;
 		width: 2rem;
+	}
+	@media (max-width: 670px) {
+		padding: 0.5rem;
 	}
 `;
 

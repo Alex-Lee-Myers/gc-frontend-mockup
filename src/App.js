@@ -5,7 +5,7 @@ import Nav from "./components/Nav";
 //Styling
 import GlobalStyle from "./components/GlobalStyle";
 //Routing
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 function App() {
 	return (
@@ -15,6 +15,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />}></Route>
 				<Route path="/game/:id" element={<Home />}></Route>
+				<Route path="*" element={<Navigate to="/" replace />} />
 			</Routes>
 		</div>
 	);

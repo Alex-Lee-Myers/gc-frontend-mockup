@@ -100,25 +100,29 @@ const Home = () => {
 };
 
 const GameList = styled(motion.div)`
-	padding: 0rem 5rem;
+	padding: 0rem 1rem;
 	h2 {
-		padding: 5rem 0rem;
+		padding: 2rem 0rem;
 		text-align: center;
 	}
-	@media (max-width: 768px) {
-		width: 100%;
-		height: 100%;
-		padding: 0px;
-		margin-top: 0px;
-		margin-bottom: 0px;
+	@media (max-width: 470px) {
+		padding: 1.25rem;
+		justify-content: center;
+		text-align: center;
 	}
 `;
 
 const Games = styled(motion.div)`
 	min-height: 80vh;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 	grid-column-gap: 3rem;
 	grid-row-gap: 5rem;
+	@media (max-width: 470px) {
+		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+		grid-column-gap: 1rem;
+		grid-row-gap: 2rem;
+	}
 `;
+
 export default Home;
