@@ -1,6 +1,6 @@
 # GameBest
 ## Redesigned, React 18, and Redux
-### [Netlify Link][g]
+### [Netlify Link][gamebest]
 
 "GameBest" is a frontend mockup redesigning a team project originally started in 2021 titled ["GameChest"][gc]. Utilizing the API available from [RAWG.io][api], building up animations and user experience incrementally before re-incorporating a backend built with NodeJS, Express and PostgreSQL, just like the [previous project][gc-backend].
 
